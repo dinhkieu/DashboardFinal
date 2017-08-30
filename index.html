@@ -1,14 +1,15 @@
-<!DOCTYPE html>
 <html>
   <head>
 	<title>Quality Dashboard</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
-	<link rel="stylesheet" type="text/css" href="style.css">
-	<script type="text/javascript">
-			google.charts.load("current", {packages:["corechart"]});
+	<link rel="stylesheet" type="text/css" href="./css/style.css">
+    <script type="text/javascript">
+		google.charts.load("current", {packages:["corechart"]});
 		google.charts.load('current', {'packages':['line']});
 		google.charts.setOnLoadCallback(function() {
 			angular.bootstrap(document.body, ['myApp']);
@@ -30,6 +31,7 @@
 			});
 		});
 		app.controller('MyCtrl', function($scope,$http,$rootScope) {
+		//$rootScope.a=9;
 			
 		//Empty values for data chart Automation
 		$rootScope.Automation=[];
@@ -93,6 +95,7 @@
 					url : "http://localhost:8080/itsQualityDashboard/testexcution/" + name
 				}).then(function mySuccess(response) {
 					$scope.currentProject.details.testExcution = [
+
 							['Never Run',     response.data.totalNeverRun],
 							['Blocked',      response.data.totalBlocked],
 							['Failed',  response.data.totalFailed],
@@ -220,14 +223,13 @@
 					data.addRows($rootScope.TestExcution);
 
         var options = {
-		  width: 600,
-		  height: 400,
           title: 'Automation',
           is3D: true,
-		  legend: { position: "bottom" }
+		  legend: { position: "bottom" },
+
         };
 
-        var chart = new google.visualization.PieChart(document.getElementById('piechartExcution'));
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
         chart.draw(data, options);
        }
 	 // Callback that draws the Area chart for Test Plan Progress  
@@ -244,14 +246,13 @@
         var options = {
 			title: 'Test Plan Progress',
 			isStacked: true,
-			width: 600,
-			height: 400,
+			height: 300,
 			colors:['#1E8449','#922B21','#9B59B6','#2C3E50'],
 			legend: {position: 'top', maxLines: 3},
 			vAxis: {minValue: 0}
         };
 
-        var chart = new google.visualization.AreaChart(document.getElementById('chartareaExcution'));
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_area'));
         chart.draw(data, options);
 	}
 	
@@ -415,6 +416,9 @@
 					var options = {
 						title: $scope.title,
 						is3D: true,
+						legend: { position: "bottom",alignment:"center",maxLines: 3 },
+						colors:['red','#ffad33','#d9d9d9','#008000']
+
 					};
 					var chart = new google.visualization.PieChart($elm[0]);
 					chart.draw(data, options);
@@ -424,11 +428,11 @@
 					var ths = '';
 					var tds = ''
 					angular.forEach($scope.details, function(v) {
-						ths += '<th>'+ v[0] +'</th>';
-						tds += '<td>'+ v[1] +'</td>';
+						ths += '<th id="table">'+ v[0] +'</th>';
+						tds += '<td id="table">'+ v[1] +'</td>';
 					});
 					
-					var detailsElem = '<table><tr>' + ths + '</tr><tr>' + tds + '</tr></table>';
+					var detailsElem = '<table id="table"><tr id="table">' + ths + '</tr><tr id="table">' + tds + '</tr></table>';
 					
 					$elm.append(detailsElem);
 	
@@ -439,9 +443,10 @@
             }
 		}
       });
-	</script>
-<body>
-	
+    
+  </script>
+  </head>
+<body>   
 	<div ng-view></div>
 </body>
   
