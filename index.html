@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
 	<title>Quality Dashboard</title>
@@ -5,9 +6,9 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
-	
-    <script type="text/javascript">
-		google.charts.load("current", {packages:["corechart"]});
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script type="text/javascript">
+			google.charts.load("current", {packages:["corechart"]});
 		google.charts.load('current', {'packages':['line']});
 		google.charts.setOnLoadCallback(function() {
 			angular.bootstrap(document.body, ['myApp']);
@@ -29,7 +30,6 @@
 			});
 		});
 		app.controller('MyCtrl', function($scope,$http,$rootScope) {
-		//$rootScope.a=9;
 			
 		//Empty values for data chart Automation
 		$rootScope.Automation=[];
@@ -220,12 +220,14 @@
 					data.addRows($rootScope.TestExcution);
 
         var options = {
+		  width: 600,
+		  height: 400,
           title: 'Automation',
           is3D: true,
 		  legend: { position: "bottom" }
         };
 
-        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        var chart = new google.visualization.PieChart(document.getElementById('piechartExcution'));
         chart.draw(data, options);
        }
 	 // Callback that draws the Area chart for Test Plan Progress  
@@ -242,13 +244,14 @@
         var options = {
 			title: 'Test Plan Progress',
 			isStacked: true,
-			height: 300,
+			width: 600,
+			height: 400,
 			colors:['#1E8449','#922B21','#9B59B6','#2C3E50'],
 			legend: {position: 'top', maxLines: 3},
 			vAxis: {minValue: 0}
         };
 
-        var chart = new google.visualization.AreaChart(document.getElementById('chart_area'));
+        var chart = new google.visualization.AreaChart(document.getElementById('chartareaExcution'));
         chart.draw(data, options);
 	}
 	
@@ -436,9 +439,9 @@
             }
 		}
       });
-    
-  </script>
-<body>   
+	</script>
+<body>
+	
 	<div ng-view></div>
 </body>
   

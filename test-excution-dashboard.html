@@ -1,10 +1,14 @@
-
-<div ng-controller='myCtrlTestExcution'>
-	<table>
-		  <tr>
-			  <td><div id="piechart_3d" style="width: 600px; height: 300px;"></div></td> 
-			  <td><div id="chart_area" style="width: 100%; height: 500px;"></div></td>
-		  </tr>
-	 </table>
-
+<div class="containExecution" ng-controller='myCtrlTestExcution'>
+	<div class="jumbotron text-center" id="headExecution">
+		<h1>Test Execution Dashboard</h1>
+	</div>
+	<div class="chartExecution">
+		 <div id="projectExecution">
+			<h3>{{nameProject}}</h3>
+		 </div>
+		 <div>
+			  <div id="piechartExcution"  ></div>
+			  <div id="chartareaExcution" ></div>
+		</div>
+	</div>
 </div>
