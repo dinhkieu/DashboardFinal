@@ -207,60 +207,59 @@
 		
 	});	
 	
-	//Call Controller for Test Excution draw Chart  
-	
-	app.controller('myCtrlTestExcution',function($rootScope,$scope,$http){
-	google.charts.setOnLoadCallback(drawTestPlanProgress);
-	google.charts.setOnLoadCallback(drawTestExcution);
-	//Empty values for dataProgress 
-	$scope.dataProgress=[];
-	
-	// Callback that draws the pie chart for Test Excution
-	function drawTestExcution() {
-		var data = new google.visualization.DataTable();
-					data.addColumn('string', 'Title');
-					data.addColumn('number', 'Count');
-					data.addRows($rootScope.TestExcution);
+		//Call Controller for Test Excution draw Chart  
+		app.controller('myCtrlTestExcution',function($rootScope,$scope,$http){
+		google.charts.setOnLoadCallback(drawTestPlanProgress);
+		google.charts.setOnLoadCallback(drawTestExcution);
+		//Empty values for dataProgress 
+		$scope.dataProgress=[];
 
-        var options = {
-		  height:500,
-		  width: 500,
-          title: 'Automation',
-          is3D: true,
-		  legend: { position: 'top',maxLines: 3  },
-		  <!-- bar: { groupWidth: '75%' }, -->
-		  isStacked: 'percent',
+		// Callback that draws the pie chart for Test Excution
+		function drawTestExcution() {
+			var data = new google.visualization.DataTable();
+			data.addColumn('string', 'Title');
+			data.addColumn('number', 'Count');
+			data.addRows($rootScope.TestExcution);
 
-        };
+			var options = {
+				height:650,
+				width: 500,
+				title: 'Test Excution',
+				titleTextStyle:{ color:'#8c7671',fontSize:20},
+				is3D: true,
+				legend: { position: 'top',maxLines: 3  },
+				colors:['#d9d9d9','#ffad33','red','#008000'],
+			};		
 
-        var chart = new google.visualization.PieChart(document.getElementById('piechartExcution'));
-        chart.draw(data, options);
-       }
-	 // Callback that draws the Area chart for Test Plan Progress  
-	function drawTestPlanProgress() {
-		var data = new google.visualization.DataTable();
-					data.addColumn('string', 'Date');
-					data.addColumn('number', 'Never Run');
-					data.addColumn('number', 'Failed');
-					data.addColumn('number', 'Blocked');
-					data.addColumn('number', 'Passed');
-					data.addRows($scope.dataProgress);
-		 
+			var chart = new google.visualization.PieChart(document.getElementById('piechartExcution'));
+			chart.draw(data, options);
+		}
+		// Callback that draws the Area chart for Test Plan Progress  
+		function drawTestPlanProgress() {
+			var data = new google.visualization.DataTable();
+			data.addColumn('string', 'Date');
+			data.addColumn('number', 'Never Run');
+			data.addColumn('number', 'Failed');
+			data.addColumn('number', 'Blocked');
+			data.addColumn('number', 'Passed');
+			data.addRows($scope.dataProgress);
 
-        var options = {
-			title: 'Test Plan Progress',
-			isStacked: true,
-			height:500,
-			width: 700,
-			colors:['#1E8449','#922B21','#9B59B6','#2C3E50'],
-			legend: {position: 'top', maxLines: 3},
-			vAxis: {minValue: 0}
-        };
 
-        var chart = new google.visualization.AreaChart(document.getElementById('chartareaExcution'));
-        chart.draw(data, options);
-	}
-	
+			var options = {
+				title: 'Test Plan Progress',
+				isStacked: true,
+				height:600,
+				width: 700,
+				titleTextStyle:{ color:'#8c7671',fontSize:20},
+				colors:['#1E8449','#922B21','#9B59B6','#2C3E50'],
+				legend: {position: 'top', maxLines: 3},
+				vAxis: {minValue: 0}
+			};
+
+			var chart = new google.visualization.AreaChart(document.getElementById('chartareaExcution'));
+			chart.draw(data, options);
+		}
+
 		$scope.testPlanProgress = function(){
 			$http({
 				method : "GET",
@@ -276,10 +275,10 @@
 				drawTestPlanProgress();
 			}, function myError(response) {
 				$scope.myWelcome = response.statusText;
-			});
-		}
-		$scope.testPlanProgress();
-	});	
+				});
+			}
+			$scope.testPlanProgress();
+		});	
 	
 	//Call Controller for Test Defect draw Chart
 	app.controller('myCtrlTestDefect',function($rootScope,$scope,$http){
