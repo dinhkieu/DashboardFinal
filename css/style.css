@@ -34,11 +34,11 @@
 }
 #headExecution{
 	background-color:white;
-	font-size:300%;
+	text-size:200%
 }
 #projectExecution{
 	text-align: center;
-	font-size:150%;
+	font-size:300%;
 }
 #piechartExcution{
 	float: left;

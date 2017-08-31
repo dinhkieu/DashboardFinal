@@ -223,9 +223,13 @@
 					data.addRows($rootScope.TestExcution);
 
         var options = {
+		  height:500,
+		  width: 500,
           title: 'Automation',
           is3D: true,
-		  legend: { position: "bottom" },
+		  legend: { position: 'top',maxLines: 3  },
+		  <!-- bar: { groupWidth: '75%' }, -->
+		  isStacked: 'percent',
 
         };
 
@@ -246,7 +250,8 @@
         var options = {
 			title: 'Test Plan Progress',
 			isStacked: true,
-			height: 300,
+			height:500,
+			width: 700,
 			colors:['#1E8449','#922B21','#9B59B6','#2C3E50'],
 			legend: {position: 'top', maxLines: 3},
 			vAxis: {minValue: 0}
@@ -416,7 +421,10 @@
 					var options = {
 						title: $scope.title,
 						is3D: true,
-						legend: { position: "bottom",alignment:"center",maxLines: 3 },
+						legend: { position: 'top',maxLines: 3  },
+					    <!-- bar: { groupWidth: '75%' }, -->
+					    isStacked: 'percent',																					
+						<!-- legend: { position: "bottom",alignment:"center",maxLines: 3 }, -->
 						colors:['red','#ffad33','#d9d9d9','#008000']
 
 					};
